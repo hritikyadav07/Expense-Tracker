@@ -56,3 +56,62 @@
      - Write project documentation, including setup guides and API documentation.
      - Assist with bug tracking and troubleshooting during the development process.
 
+
+
+
+## Frontend Setup Instructions
+
+The frontend part of the Expense Tracker project will be built using **React.js**. Follow the steps below to set up the frontend development environment.
+
+### Steps to Set Up Frontend:
+
+1. **Navigate to the frontend directory**:
+
+   Open your terminal and run the following command to move into the frontend folder inside the repository:
+
+   ```bash
+   cd frontend
+2.  **Install the dependencies**:
+
+    ```bash
+    npm i
+
+3. **Current Task**:
+    - Create the main landing page
+    - Create the dashboard Component
+    - Create the Login Component
+    - Create the Sign Up Component
+    - Create the DashBoard Component
+    - Create the Form Component(Which will take input from user and add data to the dB)
+
+
+
+
+## 📁 Project Folder Structure
+
+The following is the folder structure for the **Expense Tracker** project. It is divided into logical sections for frontend, backend, and other important configurations.
+
+```bash
+Expense-Tracker/
+├── frontend/              # Contains the React frontend
+│   ├── public/            # Public files such as index.html and static assets
+│   ├── src/
+│   │   ├── components/    # Reusable React components like ExpenseForm, ExpenseList, etc.
+│   │   ├── utils/         # Utility functions (API calls, helper functions, etc.)
+│   │   ├── App.js         # Main app component
+│   │   ├── index.js       # Main entry point for React
+│   └── package.json       # Frontend dependencies and scripts
+│
+├── backend/               # Contains the backend API
+│   ├── config/            # Configuration files (DB connection, etc.)
+│   ├── controllers/       # Express controllers for handling requests
+│   ├── models/            # Mongoose models for MongoDB
+│   ├── routes/            # API routes
+│   ├── server.js          # Main backend server file
+│   └── package.json       # Backend dependencies and scripts
+│
+├── .gitignore             # Specifies files to ignore in version control
+├── README.md              # Project documentation (this file)
+├── LICENSE                # Project license information
+└── .env                   # Environment variables (for sensitive information like DB connection)
+
