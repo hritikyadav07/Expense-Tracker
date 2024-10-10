@@ -7,7 +7,7 @@ function Logo() {
     <div className='font-bold text-3xl flex'>
       {/* <Image src ="frontend\src\assets\Logo.jpeg"/> */}
         <img src={LogoImage} className=" h-12" alt="Logo" />
-         ExpenseWise
+         Expense Tracker
     </div>
     </>
   )

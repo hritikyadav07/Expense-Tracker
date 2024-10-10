@@ -4,7 +4,7 @@ import Logo from "../Logo";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white py-10 px-5">
+    <footer id="contact" className="bg-gray-900 text-white py-10 px-5">
       <div className="max-w-7xl mx-auto">
         {/* Newsletter Section */}
         <div className="flex flex-col items-center mb-6">
@@ -30,7 +30,7 @@ const Footer = () => {
           {/* Links */}
           <div className="flex flex-wrap justify-center space-x-5">
             <a href="/" className="text-gray-400 hover:text-white">Pricing</a>
-            <a href="/" className="text-gray-400 hover:text-white">About us</a>
+            <a href="#about" className="text-gray-400 hover:text-white">About us</a>
             <a href="/" className="text-gray-400 hover:text-white">Features</a>
             <a href="/" className="text-gray-400 hover:text-white">Help Center</a>
             <a href="/" className="text-gray-400 hover:text-white">Contact us</a>
