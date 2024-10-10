@@ -58,9 +58,23 @@ const prevTestimonials = () => {
       }
   };
 
+  function circularSlice(arr, start, end) {
+    const len = arr.length;
+    // Normalize start and end to be within array bounds
+    start = ((start % len) + len) % len;
+    end = ((end % len) + len) % len;
+  
+    if (start < end) {
+        return arr.slice(start, end);
+    } else {
+        return arr.slice(start).concat(arr.slice(0, end));
+    }
+  }
   // Calculate the index for slicing
   const start = currentIndex;
-  const displayedTestimonials = testimonials.slice(start, start + 3);
+  const len = testimonials.length; 
+  const displayedTestimonials = circularSlice(testimonials, start, ((start+3)%len));
+
 
   return (
     <div className="bg-gray-50 p-8 mx-32">
@@ -89,3 +103,9 @@ const prevTestimonials = () => {
 };
 
 export default Review;
+
+
+
+// // Example usage:
+// const arr = [1, 2, 3, 4, 5];
+// console.log(circularSlice(arr, 3, 1)); // Output: [4, 5, 1]
