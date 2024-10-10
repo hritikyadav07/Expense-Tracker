@@ -1,6 +1,14 @@
+import { Link } from 'react-router-dom';
 import HeroBG from '../../assets/HeroBG.Jpg'
+import { useNavigate } from 'react-router-dom';
+
 
 const Hero = () => {
+    const navigate = useNavigate();
+    const handleSignupClick = () => {
+      navigate('/auth?type=signup');
+    };
+
     return (
       <div id='hero'
         className="h-screen bg-center  bg-cover"
@@ -18,7 +26,7 @@ const Hero = () => {
             <div>Combining Modern Technology with ancient wisdom, our expense tracker</div>
             <div>empowers you to align your daily expenses with long-term prosperity.</div>
           </div>
-          <button className=" my-4 px-6 py-3 border-2 border-yellow-600 text-yellow-600 font-bold rounded-lg hover:bg-yellow-600 hover:text-white transition-all duration-300">
+          <button onClick={handleSignupClick} className=" my-4 px-6 py-3 border-2 border-yellow-600 text-yellow-600 font-bold rounded-lg hover:bg-yellow-600 hover:text-white transition-all duration-300">
             Get Started
           </button>
 

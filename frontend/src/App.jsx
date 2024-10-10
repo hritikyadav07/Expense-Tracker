@@ -6,11 +6,16 @@ import ProtectedRoute from './components/ProtectedRoute';
 import { Provider } from 'react-redux';
 import store from './store/store'; // Import your Redux store
 import DashboardHome from './components/DashBoard/DashboardHome';
+import LoginSignup from './pages/LoginSignup'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Home />, // Home is accessible to all users
+  },
+  {
+    path: 'auth',
+    element: <LoginSignup />
   },
   {
     path: 'dashboard',
