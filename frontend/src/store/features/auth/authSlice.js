@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const initialState = {
@@ -33,10 +33,45 @@ const authSlice = createSlice({
       state.user = null;
       localStorage.removeItem('token');
     },
+    loadUserSuccess: (state, action) => {
+      state.isAuthenticated = true;
+      state.user = action.payload.user;
+    },
+    loadUserFailure: (state) => {
+      state.isAuthenticated = false;
+      state.token = null;
+      state.user = null;
+    },
+    // Signup Actions
+    signupRequest: (state) => {
+      state.loading = true;
+      state.error = null; // Reset error on new request
+    },
+    signupSuccess: (state, action) => {
+      state.loading = false;
+      state.isAuthenticated = true;
+      state.token = action.payload.token;
+      state.user = action.payload.user;
+      localStorage.setItem('token', action.payload.token);
+    },
+    signupFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
-export const { loginRequest, loginSuccess, loginFailure, logout } = authSlice.actions;
+export const {
+  loginRequest,
+  loginSuccess,
+  loginFailure,
+  logout,
+  loadUserSuccess,
+  loadUserFailure,
+  signupRequest,
+  signupSuccess,
+  signupFailure,
+} = authSlice.actions;
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -44,8 +79,41 @@ export const login = (email, password) => async (dispatch) => {
     const response = await axios.post('/api/auth/login', { email, password });
     dispatch(loginSuccess(response.data));
   } catch (error) {
-    dispatch(loginFailure(error.response.data.message));
+    dispatch(loginFailure(error.response?.data?.message || 'An error occurred'));
   }
 };
+
+export const loadUser = createAsyncThunk('auth/loadUser', async (_, thunkAPI) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    try {
+      const response = await axios.get('/api/auth/me', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue('Unable to load user');
+    }
+  } else {
+    return thunkAPI.rejectWithValue('No token found');
+  }
+});
+
+// Signup action
+export const signup = (formData) => async (dispatch) => {
+  try {
+    dispatch(signupRequest());
+    const response = await axios.post('/api/auth/signup', formData);
+    dispatch(signupSuccess(response.data));
+    
+    // Automatically log in the user after successful signup
+    dispatch(login(formData.email, formData.password)); // Assume formData has email and password
+  } catch (error) {
+    dispatch(signupFailure(error.response?.data?.message || 'An error occurred'));
+  }
+};
+
 
 export default authSlice.reducer;

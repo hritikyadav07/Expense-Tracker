@@ -5,7 +5,7 @@ import expenseReducer from './features/expenses/expenseSlice';
 const store = configureStore({
   reducer: {
     auth: authReducer,
-    expenses: expenseReducer,
+    // expenses: expenseReducer,
   },
 });
 

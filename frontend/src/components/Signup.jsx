@@ -1,24 +1,42 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { signup } from '../store/features/auth/authSlice'; // Assuming you have a signup action
 
 const Signup = ({ onSwitch }) => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.auth); // To get loading/error state
 
   // Function to toggle password visibility
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
 
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = { firstName, lastName, email, password };
+    dispatch(signup(formData)); // Dispatch the signup action to the store
+  };
+
   return (
-    <div className="flex justify-center items-center min-h-screen p-top-5 mx-36"> {/* Center the form */}
-      <div className="w-full bg-white py-5 px-16 rounded-lg shadow-lg mt-10"> {/* Increase the width and add margin-top */}
+    <div className="flex justify-center items-center min-h-screen p-top-5 mx-36">
+      <div className="w-full bg-white py-5 px-16 rounded-lg shadow-lg mt-10">
         <h2 className="text-2xl font-bold mb-2">Begin your journey</h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 font-semibold mb-1">First name</label>
             <input
               type="text"
               placeholder="Input first name"
               className="w-full px-3 py-2 border rounded-md bg-gray-100"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
             />
           </div>
           <div className="mb-4">
@@ -27,6 +45,8 @@ const Signup = ({ onSwitch }) => {
               type="text"
               placeholder="Input last name"
               className="w-full px-3 py-2 border rounded-md bg-gray-100"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
             />
           </div>
           <div className="mb-4">
@@ -35,6 +55,8 @@ const Signup = ({ onSwitch }) => {
               type="email"
               placeholder="example.email@gmail.com"
               className="w-full px-3 py-2 border rounded-md bg-gray-100"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="mb-4 relative">
@@ -43,6 +65,8 @@ const Signup = ({ onSwitch }) => {
               type={passwordVisible ? 'text' : 'password'}
               placeholder="Enter at least 8+ characters"
               className="w-full px-3 py-2 border rounded-md bg-gray-100"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <button
               type="button"
@@ -50,9 +74,9 @@ const Signup = ({ onSwitch }) => {
               className="absolute right-3 top-9 text-gray-500 focus:outline-none"
             >
               {passwordVisible ? (
-                <i className="fas fa-eye"></i> // Use FontAwesome eye icon
+                <i className="fas fa-eye"></i>
               ) : (
-                <i className="fas fa-eye-slash"></i> // Use FontAwesome eye-slash icon
+                <i className="fas fa-eye-slash"></i>
               )}
             </button>
           </div>
@@ -72,9 +96,11 @@ const Signup = ({ onSwitch }) => {
           <button
             type="submit"
             className="w-full py-2 px-4 bg-amber-600 text-white font-semibold rounded-md hover:bg-amber-700 transition-colors"
+            disabled={loading} // Disable the button when loading
           >
-            Register
+            {loading ? 'Registering...' : 'Register'}
           </button>
+          {error && <p className="text-red-500 text-sm mt-2">{error}</p>} {/* Display error */}
         </form>
 
         {/* Social login */}

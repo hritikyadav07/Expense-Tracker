@@ -1,33 +1,66 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../store/features/auth/authSlice';
 
 const Login = ({ onSwitch }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  
+  // Access the auth state
+  const { loading, error } = useSelector((state) => state.auth);
+
+  // Handle form submission
+  const handleLoginEvent = (e) => {
+    e.preventDefault();
+
+    // Dispatch the login action, passing email and password
+    dispatch(login(email, password));
+  };
+  
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold text-center mb-2">Log in to Expense Tracker</h2>
         <p className="text-gray-500 text-center mb-6">Manage your expenses effortlessly</p>
 
-        <form className="space-y-4">
+        {/* Error message for invalid credentials */}
+        {error && (
+          <div className="text-red-500 text-center mb-4">
+            {/* {error} Display the error message */}
+            Invalid Credentials
+          </div>
+        )}
+
+        <form className="space-y-4" onSubmit={handleLoginEvent}>
           {/* Email Input */}
           <input
             type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
             className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-yellow-500"
+            required
           />
 
           {/* Password Input */}
           <input
             type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
             className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-yellow-500"
+            required
           />
 
           {/* Continue with Email Button */}
           <button
             type="submit"
             className="w-full py-2 text-white bg-yellow-600 rounded hover:bg-yellow-500 transition duration-200"
+            disabled={loading} // Disable button while logging in
           >
-            Continue with Email
+            {loading ? 'Logging in...' : 'Continue with Email'}
           </button>
 
           {/* Create Account Button */}
