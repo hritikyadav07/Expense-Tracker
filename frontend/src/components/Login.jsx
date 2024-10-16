@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../store/features/auth/authSlice';
 
@@ -6,6 +6,8 @@ const Login = ({ onSwitch }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  const { isAuthenticated, loading, error } = useSelector((state) => state.auth);
+  const navigate = useNavigate(); // Use for redirection
   
   // Access the auth state
   const { loading, error } = useSelector((state) => state.auth);
@@ -13,10 +15,16 @@ const Login = ({ onSwitch }) => {
   // Handle form submission
   const handleLoginEvent = (e) => {
     e.preventDefault();
-
     // Dispatch the login action, passing email and password
     dispatch(login(email, password));
   };
+
+  // Redirect to the dashboard if login is successful
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard');
+    }
+  }, [isAuthenticated, navigate]);
   
 
   return (

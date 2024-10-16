@@ -26,7 +26,7 @@
      - Implement JWT-based user authentication and authorization.
 
 ### 2. **Frontend Development** (User Interface)
-   - **Assigned to:** [Ayush Gupta]
+   - **Assigned to:** [Hritik Yadav]
    - **Tasks:**
      - Build the user interface using React.js.
      - Create reusable components for input forms, expense lists, and dashboard views.
@@ -41,7 +41,7 @@
      - Ensure accessibility and responsiveness for different screen sizes.
 
 ### 4. **Database and Deployment**
-   - **Assigned to:** [Pending]
+   - **Assigned to:** [Ayush Gupta]
    - **Tasks:**
      - Set up MongoDB database and create necessary collections (users, expenses, etc.).
      - Implement efficient database queries for user-specific expense retrieval.
@@ -49,7 +49,7 @@
      - Monitor and maintain the server and database for uptime.
 
 ### 5. **Testing and Documentation**
-   - **Assigned to:** [Pending]
+   - **Assigned to:** [Kartikey Mishra]
    - **Tasks:**
      - Write unit and integration tests for backend and frontend components.
      - Ensure overall code quality by setting up automated testing (using Jest, Mocha, etc.).
@@ -76,13 +76,6 @@ The frontend part of the Expense Tracker project will be built using **React.js*
     ```bash
     npm i
 
-3. **Current Task**:
-    - Create the main landing page
-    - Create the dashboard Component
-    - Create the Login Component
-    - Create the Sign Up Component
-    - Create the DashBoard Component
-    - Create the Form Component(Which will take input from user and add data to the dB)
 
 
 
@@ -96,10 +89,27 @@ Expense-Tracker/
 ├── frontend/              # Contains the React frontend
 │   ├── public/            # Public files such as index.html and static assets
 │   ├── src/
-│   │   ├── components/    # Reusable React components like ExpenseForm, ExpenseList, etc.
+│   │   ├── assets/    # Reusable React components like ExpenseForm, ExpenseList
+│   │   ├── components/    # Reusable React components like ExpenseForm, ExpenseList
+|   |   |   ├── Header
+|   |   |   ├── Footer
+|   |   |   ├── Main       # Contains main page Elements
+|   |   |   ├── Dashboard 
+|   |   |   ├── Login.jsx
+|   |   |   ├── Logo.jsx
+|   |   |   └── Signup.jsx
 │   │   ├── utils/         # Utility functions (API calls, helper functions, etc.)
+│   │   ├── pages/         # Utility functions (API calls, helper functions, etc.)
+|   |   |   ├── Dashboard.jsx
+|   |   |   ├── Home.jsx
+|   |   |   └── LoginSignup.jsx
+│   │   ├── store/         # Utility functions (API calls, helper functions, etc.)
+|   |   |   ├── features
+|   |   |   |   ├── auth/authSlice
+|   |   |   |   └── expenses/expenseSlice
+|   |   |   └── Store.js
 │   │   ├── App.js         # Main app component
-│   │   ├── index.js       # Main entry point for React
+│   │   ├── main.js       # Main entry point for React
 │   └── package.json       # Frontend dependencies and scripts
 │
 ├── backend/               # Contains the backend API
@@ -114,4 +124,20 @@ Expense-Tracker/
 ├── README.md              # Project documentation (this file)
 ├── LICENSE                # Project license information
 └── .env                   # Environment variables (for sensitive information like DB connection)
+```
+#
+1. **Current Task**:
+    - Creating Login/ SignUp Backend Functionalities
+    - Creating Dashboard
+    - Creating Expense APIs
 
+##
+**API Routes**
+- **Login  Route** : /api/auth/login
+   - Method: POST
+   - Body: { email, password }
+   - Response: { token, user }
+- **Signup Route**: /api/auth/signup
+   - Method: POST
+   - Body: { firstName, lastName, email, password }
+   - Response: { token, user }
