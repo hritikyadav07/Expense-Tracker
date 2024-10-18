@@ -26,7 +26,7 @@
      - Implement JWT-based user authentication and authorization.
 
 ### 2. **Frontend Development** (User Interface)
-   - **Assigned to:** [Hritik Yadav]
+   - **Assigned to:** [Hritik Yadav, Omisha Singh]
    - **Tasks:**
      - Build the user interface using React.js.
      - Create reusable components for input forms, expense lists, and dashboard views.
@@ -49,7 +49,7 @@
      - Monitor and maintain the server and database for uptime.
 
 ### 5. **Testing and Documentation**
-   - **Assigned to:** [Kartikey Mishra]
+   - **Assigned to:** [None]
    - **Tasks:**
      - Write unit and integration tests for backend and frontend components.
      - Ensure overall code quality by setting up automated testing (using Jest, Mocha, etc.).
