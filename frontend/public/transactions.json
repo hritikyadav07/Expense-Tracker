@@ -1,0 +1,145 @@
+{
+    "transactions": [
+      {
+        "id": 1,
+        "description": "Salary",
+        "amount": "+5000",
+        "category": "Income",
+        "date": "2024-10-01"
+      },
+      {
+        "id": 2,
+        "description": "Groceries",
+        "amount": "-150",
+        "category": "Food",
+        "date": "2024-10-02"
+      },
+      {
+        "id": 3,
+        "description": "Electricity Bill",
+        "amount": "-100",
+        "category": "Utilities",
+        "date": "2024-10-03"
+      },
+      {
+        "id": 4,
+        "description": "Freelance Project",
+        "amount": "+700",
+        "category": "Income",
+        "date": "2024-10-04"
+      },
+      {
+        "id": 5,
+        "description": "Restaurant",
+        "amount": "-60",
+        "category": "Food",
+        "date": "2024-10-05"
+      },
+      {
+        "id": 6,
+        "description": "Internet Bill",
+        "amount": "-50",
+        "category": "Utilities",
+        "date": "2024-10-06"
+      },
+      {
+        "id": 7,
+        "description": "Movie Tickets",
+        "amount": "-25",
+        "category": "Entertainment",
+        "date": "2024-10-07"
+      },
+      {
+        "id": 8,
+        "description": "Online Course",
+        "amount": "-200",
+        "category": "Education",
+        "date": "2024-10-08"
+      },
+      {
+        "id": 9,
+        "description": "Consulting Fee",
+        "amount": "+300",
+        "category": "Income",
+        "date": "2024-10-09"
+      },
+      {
+        "id": 10,
+        "description": "Rent",
+        "amount": "-1200",
+        "category": "Housing",
+        "date": "2024-10-10"
+      },
+      {
+        "id": 11,
+        "description": "Gym Membership",
+        "amount": "-40",
+        "category": "Health",
+        "date": "2024-10-11"
+      },
+      {
+        "id": 12,
+        "description": "Bonus",
+        "amount": "+400",
+        "category": "Income",
+        "date": "2024-10-12"
+      },
+      {
+        "id": 13,
+        "description": "Gift",
+        "amount": "-50",
+        "category": "Gifts",
+        "date": "2024-10-13"
+      },
+      {
+        "id": 14,
+        "description": "Coffee",
+        "amount": "-5",
+        "category": "Food",
+        "date": "2024-10-14"
+      },
+      {
+        "id": 15,
+        "description": "Investment Return",
+        "amount": "+100",
+        "category": "Income",
+        "date": "2024-10-15"
+      },
+      {
+        "id": 16,
+        "description": "Phone Bill",
+        "amount": "-30",
+        "category": "Utilities",
+        "date": "2024-10-16"
+      },
+      {
+        "id": 17,
+        "description": "Lunch",
+        "amount": "-12",
+        "category": "Food",
+        "date": "2024-10-17"
+      },
+      {
+        "id": 18,
+        "description": "Clothing",
+        "amount": "-70",
+        "category": "Shopping",
+        "date": "2024-10-18"
+      },
+      {
+        "id": 19,
+        "description": "Car Repair",
+        "amount": "-200",
+        "category": "Transport",
+        "date": "2024-10-19"
+      },
+      {
+        "id": 20,
+        "description": "Dividend",
+        "amount": "+50",
+        "category": "Income",
+        "date": "2024-10-20"
+      }
+    ]
+  }
+  

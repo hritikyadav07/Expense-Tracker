@@ -91,23 +91,23 @@ Expense-Tracker/
 │   ├── src/
 │   │   ├── assets/    # Reusable React components like ExpenseForm, ExpenseList
 │   │   ├── components/    # Reusable React components like ExpenseForm, ExpenseList
-|   |   |   ├── Header
-|   |   |   ├── Footer
-|   |   |   ├── Main       # Contains main page Elements
-|   |   |   ├── Dashboard 
-|   |   |   ├── Login.jsx
-|   |   |   ├── Logo.jsx
-|   |   |   └── Signup.jsx
+│   │   │   ├── Header
+│   │   │   ├── Footer
+│   │   │   ├── Main       # Contains main page Elements
+│   │   │   ├── Dashboard 
+│   │   │   ├── Login.jsx
+│   │   │   ├── Logo.jsx
+│   │   │   └── Signup.jsx
 │   │   ├── utils/         # Utility functions (API calls, helper functions, etc.)
 │   │   ├── pages/         # Utility functions (API calls, helper functions, etc.)
-|   |   |   ├── Dashboard.jsx
-|   |   |   ├── Home.jsx
-|   |   |   └── LoginSignup.jsx
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── Home.jsx
+│   │   │   └── LoginSignup.jsx
 │   │   ├── store/         # Utility functions (API calls, helper functions, etc.)
-|   |   |   ├── features
-|   |   |   |   ├── auth/authSlice
-|   |   |   |   └── expenses/expenseSlice
-|   |   |   └── Store.js
+│   │   │   ├── features
+│   │   │   │   ├── auth/authSlice
+│   │   │   │   └── expenses/expenseSlice
+│   │   │   └── Store.js
 │   │   ├── App.js         # Main app component
 │   │   ├── main.js       # Main entry point for React
 │   └── package.json       # Frontend dependencies and scripts

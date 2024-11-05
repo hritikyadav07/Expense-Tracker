@@ -4,10 +4,8 @@ import React from 'react';
 
 const DashboardHome = () => {
   return (
-    <div>
-      <h2>Dashboard Home</h2>
-      <p>Welcome to your dashboard! Here you can manage your expenses.</p>
-      {/* Add your main dashboard content here */}
+    <div className='bg-slate-100 p-3'>
+      <h1>Welcome</h1>
     </div>
   );
 };

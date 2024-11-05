@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../store/features/auth/authSlice';
+import {useNavigate } from 'react-router-dom'
 
 const Login = ({ onSwitch }) => {
   const [email, setEmail] = useState('');
@@ -10,7 +11,7 @@ const Login = ({ onSwitch }) => {
   const navigate = useNavigate(); // Use for redirection
   
   // Access the auth state
-  const { loading, error } = useSelector((state) => state.auth);
+  // const { loading, error } = useSelector((state) => state.auth);
 
   // Handle form submission
   const handleLoginEvent = (e) => {
