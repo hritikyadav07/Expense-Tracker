@@ -1,32 +1,60 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../store/features/auth/authSlice';
-import {useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { handleError, handleSuccess } from '../utils';
+import { ToastContainer } from 'react-toastify';
 
 const Login = ({ onSwitch }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
-  const { isAuthenticated, loading, error } = useSelector((state) => state.auth);
-  const navigate = useNavigate(); // Use for redirection
-  
-  // Access the auth state
-  // const { loading, error } = useSelector((state) => state.auth);
+  const [loginInfo, setLoginInfo] = useState({
+    email: '',
+    password: ''
+  });
+  const [loading, setLoading] = useState(false); // Local loading state
+  const navigate = useNavigate();
 
-  // Handle form submission
-  const handleLoginEvent = (e) => {
-    e.preventDefault();
-    // Dispatch the login action, passing email and password
-    dispatch(login(email, password));
+  // Handle input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setLoginInfo((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Redirect to the dashboard if login is successful
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/dashboard');
+  // Handle form submission for login
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const { email, password } = loginInfo;
+
+    if (!email || !password) {
+      return handleError('All fields are required');
     }
-  }, [isAuthenticated, navigate]);
-  
+
+    setLoading(true); // Set loading state to true before API call
+    try {
+      const url = "http://localhost:9000/auth/login";
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loginInfo),
+      });
+      const result = await response.json();
+      if (response.ok && result.success) {
+        handleSuccess(result.message || 'Login Successful');
+        localStorage.setItem('token', result.jwtToken);
+        console.log(result);
+        localStorage.setItem('loggedInUser', result.fname);
+        setTimeout(() => {
+          navigate('/');
+        }, 1000);
+      } else {
+        const errorMessage = result.error || 'Login failed. Please check your credentials.';
+        handleError(errorMessage); // Show toast with error message
+      }
+    } catch (err) {
+      handleError(err);
+    } finally {
+      setLoading(false); // Set loading state to false after API call
+    }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
@@ -34,20 +62,12 @@ const Login = ({ onSwitch }) => {
         <h2 className="text-2xl font-bold text-center mb-2">Log in to Expense Tracker</h2>
         <p className="text-gray-500 text-center mb-6">Manage your expenses effortlessly</p>
 
-        {/* Error message for invalid credentials */}
-        {error && (
-          <div className="text-red-500 text-center mb-4">
-            {/* {error} Display the error message */}
-            Invalid Credentials
-          </div>
-        )}
-
-        <form className="space-y-4" onSubmit={handleLoginEvent}>
+        <form className="space-y-4" onSubmit={handleLogin}>
           {/* Email Input */}
           <input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleChange}
+            name="email"
             placeholder="Email"
             className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-yellow-500"
             required
@@ -56,18 +76,18 @@ const Login = ({ onSwitch }) => {
           {/* Password Input */}
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handleChange}
+            name="password"
             placeholder="Password"
             className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-yellow-500"
             required
           />
 
-          {/* Continue with Email Button */}
+          {/* Login Button */}
           <button
             type="submit"
             className="w-full py-2 text-white bg-yellow-600 rounded hover:bg-yellow-500 transition duration-200"
-            disabled={loading} // Disable button while logging in
+            disabled={loading} // Disable button while loading
           >
             {loading ? 'Logging in...' : 'Continue with Email'}
           </button>
@@ -84,7 +104,6 @@ const Login = ({ onSwitch }) => {
 
         {/* Social Login Options */}
         <div className="flex justify-center space-x-4 mt-6">
-          {/* Replace these divs with actual icons */}
           <div className="w-10 h-10 bg-black rounded-full">
             <img src="/path-to-your-icon1.png" alt="Social Login" className="w-full h-full" />
           </div>
@@ -103,6 +122,7 @@ const Login = ({ onSwitch }) => {
           </a>
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 };
