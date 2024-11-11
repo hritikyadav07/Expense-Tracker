@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useEffect } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './pages/Home';
@@ -27,8 +28,8 @@ const AppContent = () => {
   const router = createBrowserRouter([
     {
       path: '',
-      element: !isAuthenticated ? <Dashboard /> : <Home />, // Conditional rendering
-      children: !isAuthenticated
+      element: isAuthenticated ? <Dashboard /> : <Home />, // Conditional rendering
+      children: isAuthenticated
         ? [
             {
               path: 'dashboard',
