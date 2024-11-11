@@ -12,6 +12,10 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
+<<<<<<< HEAD
+=======
+  "devDependencies": {},
+>>>>>>> 107d038e2d21686bd1103083b18ed3a02a700f8b
   "scripts": {
     "start": "nodemon index.js"
   },
