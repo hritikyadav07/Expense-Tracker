@@ -1,42 +1,77 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { signup } from '../store/features/auth/authSlice'; // Assuming you have a signup action
-
+import { useSelector } from 'react-redux';
+import {ToastContainer} from 'react-toastify';
+import { handleError, handleSuccess } from '../utils';
+import { useNavigate } from 'react-router-dom';
 const Signup = ({ onSwitch }) => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [signupInfo, setSignupInfo] = useState({
+    fname: '',
+    lname: '',
+    email: '',
+    password: ''
+  })
   const [passwordVisible, setPasswordVisible] = useState(false);
-
-  const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.auth); // To get loading/error state
 
+  const navigate = useNavigate();
   // Function to toggle password visibility
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+    const copySignupInfo = {...signupInfo};
+    copySignupInfo[name] = value;
+    setSignupInfo(copySignupInfo);
+  }
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    const formData = { firstName, lastName, email, password };
-    dispatch(signup(formData)); // Dispatch the signup action to the store
-  };
+    const {fname, lname, email, password} = signupInfo;
+    if(!fname || !lname || !email || !password) {
+      return handleError('All fields are required')
+    }
+    try {
+      const url = "http://localhost:9000/auth/signup";
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(signupInfo)
+    });
+    const result = await response.json();
+    console.log(result);
+    if(response.ok && result.success) {
+      handleSuccess(result.message || 'Signup Successfull');
+      setTimeout(() => {
+        navigate('/auth?type=login');
+      }, 1000);
+    } else {
+      const errorMessage = result.error || 'Signup failed. Please check your input.';
+      handleError(errorMessage);
+    }
+    console.log(result);
+    } catch(err) {
+      handleError(err);
+    }
+  }
 
   return (
     <div className="flex justify-center items-center min-h-screen p-top-5 mx-36">
       <div className="w-full bg-white py-5 px-16 rounded-lg shadow-lg mt-10">
         <h2 className="text-2xl font-bold mb-2">Begin your journey</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSignUp}>
           <div className="mb-4">
             <label className="block text-gray-700 font-semibold mb-1">First name</label>
             <input
               type="text"
               placeholder="Input first name"
               className="w-full px-3 py-2 border rounded-md bg-gray-100"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              name='fname'
+              onChange={handleChange}
             />
           </div>
           <div className="mb-4">
@@ -45,8 +80,8 @@ const Signup = ({ onSwitch }) => {
               type="text"
               placeholder="Input last name"
               className="w-full px-3 py-2 border rounded-md bg-gray-100"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
+              name='lname'
+              onChange={handleChange}
             />
           </div>
           <div className="mb-4">
@@ -55,8 +90,8 @@ const Signup = ({ onSwitch }) => {
               type="email"
               placeholder="example.email@gmail.com"
               className="w-full px-3 py-2 border rounded-md bg-gray-100"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              name='email'
+              onChange={handleChange}
             />
           </div>
           <div className="mb-4 relative">
@@ -65,8 +100,8 @@ const Signup = ({ onSwitch }) => {
               type={passwordVisible ? 'text' : 'password'}
               placeholder="Enter at least 8+ characters"
               className="w-full px-3 py-2 border rounded-md bg-gray-100"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name='password'
+              onChange={handleChange}
             />
             <button
               type="button"
@@ -129,6 +164,7 @@ const Signup = ({ onSwitch }) => {
           </button>
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 };
