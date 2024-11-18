@@ -7,7 +7,7 @@ import DashboardHome from './components/DashBoard/DashboardHome';
 import LoginSignup from './pages/LoginSignup';
 import { Provider, useDispatch, useSelector } from 'react-redux';  // Move dispatch and selector hooks inside provider
 import store from './store/store';
-import { loadUser } from './store/features/auth/authSlice';
+// import { loadUser } from './store/features/auth/authSlice';
 import Transactions from './components/DashBoard/Transactions';
 import Analytics from './components/DashBoard/Analytics';
 import Expenses from './components/DashBoard/Expenses';
@@ -17,58 +17,38 @@ import Settings from './components/DashBoard/Settings';
 import Render from './components/DashBoard/Render';
 
 const AppContent = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { isAuthenticated, loading } = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    dispatch(loadUser()); // Load the user data on app start
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(loadUser()); // Load the user data on app start
+  // }, [dispatch]);
 
-  // Adjust the router based on the authentication state
   const router = createBrowserRouter([
     {
       path: '',
-      element: isAuthenticated ? <Dashboard /> : <Home />, // Conditional rendering
-      children: isAuthenticated
-        ? [
+      element: <Home />, // Conditional rendering based on authentication
+    },
+    {
+      path:'dashboard',
+      element: <Dashboard />, // Conditional rendering based on
+      children: !isAuthenticated
+        ?[
             {
-              path: 'dashboard',
-              element: <Render/>, 
-              children:
-              [
-                {
-                  path: '',
-                  element: <DashboardHome/>
-                },
-                {
-                  path: 'transactions',
-                  element: <Transactions/>
-                },
-                {
-                  path: 'analytics',
-                  element: <Analytics/>
-                },
-                {
-                  path: 'expenses',
-                  element: <Expenses/>
-                },
-                {
-                  path: 'investments',
-                  element: <Investments/>
-                },
-                {
-                  path:'savings',
-                  element: <Savings/>
-                },
-                {
-                  path:'settings',
-                  element: <Settings/>
-                }
+              path: '',
+              element: <Render/>,
+              children: [
+                { path: '', element: <DashboardHome /> },
+                { path: 'transactions', element: <Transactions /> },
+                { path: 'analytics', element: <Analytics /> },
+                { path: 'expenses', element: <Expenses /> },
+                { path: 'investments', element: <Investments /> },
+                { path: 'savings', element: <Savings /> },
+                { path: 'settings', element: <Settings /> },
               ]
-              
             }
           ]
-        : [],
+        : [], // Empty routes when not authenticated
     },
     {
       path: 'auth',
@@ -82,6 +62,7 @@ const AppContent = () => {
 
   return loading ? <div>Loading...</div> : <RouterProvider router={router} />;
 };
+
 
 const App = () => {
   return (

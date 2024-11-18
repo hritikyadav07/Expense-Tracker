@@ -58,7 +58,10 @@ const authSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-  },
+    setAuth: (state, action) => {
+      state.isAuthenticated = !action.payload;
+    }
+  }
 });
 
 export const {
@@ -71,6 +74,7 @@ export const {
   signupRequest,
   signupSuccess,
   signupFailure,
+  setAuth,
 } = authSlice.actions;
 
 export const login = (email, password) => async (dispatch) => {
@@ -105,7 +109,7 @@ export const loadUser = createAsyncThunk('auth/loadUser', async (_, thunkAPI) =>
 export const signup = (formData) => async (dispatch) => {
   try {
     dispatch(signupRequest());
-    const response = await axios.post('/api/auth/signup', formData);
+    const response = await axios.post('https:localhost:9000/auth/signup', formData);
     dispatch(signupSuccess(response.data));
     
     // Automatically log in the user after successful signup
@@ -114,6 +118,7 @@ export const signup = (formData) => async (dispatch) => {
     dispatch(signupFailure(error.response?.data?.message || 'An error occurred'));
   }
 };
+
 
 
 export default authSlice.reducer;
