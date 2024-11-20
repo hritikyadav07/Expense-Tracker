@@ -1,11 +1,10 @@
-import React from 'react'
-
-function Investment() {
+import InvestmentList from '../Investment/InvestmentList'
+function Investments() {
   return (
     <div className='bg-slate-100 p-3'>
-      <h1>Investements</h1>
+      <InvestmentList/>
     </div>
   )
 }
 
-export default Investment
+export default Investments;

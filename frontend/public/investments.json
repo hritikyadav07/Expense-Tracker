@@ -1,0 +1,162 @@
+[
+  {
+    "title": "Adani Enterprises",
+    "amount": 2400,
+    "profit": true,
+    "status": "Green",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Adani_Enterprises_logo.png/640px-Adani_Enterprises_logo.png",
+    "bgColor": "bg-blue-500"
+  },
+  {
+    "title": "Adani Green Energy",
+    "amount": 1500,
+    "profit": false,
+    "status": "Red",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/14/Adani_Green_Energy_logo.png",
+    "bgColor": "bg-red-500"
+  },
+  {
+    "title": "Adani Ports & SEZ",
+    "amount": 1800,
+    "profit": true,
+    "status": "Green",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/en/thumb/a/aa/Adani_Ports_and_Special_Economic_Zone_logo.svg/1200px-Adani_Ports_and_Special_Economic_Zone_logo.svg.png",
+    "bgColor": "bg-blue-500"
+  },
+  {
+    "title": "Adani Power",
+    "amount": 1300,
+    "profit": false,
+    "status": "Red",
+    "imageUrl": "https://upload.wikimedia/en/thumb/5/54/Adani_Power_Logo.png/800px-Adani_Power_Logo.png",
+    "bgColor": "bg-red-500"
+  },
+  {
+    "title": "Adani Total Gas",
+    "amount": 2050,
+    "profit": true,
+    "status": "Green",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/en/thumb/c/c6/Adani_Total_Gas_logo.svg/1200px-Adani_Total_Gas_logo.svg.png",
+    "bgColor": "bg-blue-500"
+  },
+  {
+    "title": "Adani Transmission",
+    "amount": 1750,
+    "profit": false,
+    "status": "Red",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/en/thumb/5/5b/Adani_Transmission_Logo.png/1200px-Adani_Transmission_Logo.png",
+    "bgColor": "bg-red-500"
+  },
+  {
+    "title": "Adani Wilmar",
+    "amount": 980,
+    "profit": true,
+    "status": "Green",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Adani_Wilmar_logo.svg/1200px-Adani_Wilmar_logo.svg.png",
+    "bgColor": "bg-blue-500"
+  },
+  {
+    "title": "Adani Cement",
+    "amount": 1250,
+    "profit": false,
+    "status": "Red",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/ACC_Cement_logo.svg/1200px-ACC_Cement_logo.svg.png",
+    "bgColor": "bg-red-500"
+  },
+  {
+    "title": "Reliance Industries",
+    "amount": 3000,
+    "profit": true,
+    "status": "Green",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Reliance_Industries_logo.svg/1200px-Reliance_Industries_logo.svg.png",
+    "bgColor": "bg-blue-500"
+  },
+  {
+    "title": "Reliance Jio",
+    "amount": 2200,
+    "profit": true,
+    "status": "Green",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Jio_logo.svg/1024px-Jio_logo.svg.png",
+    "bgColor": "bg-blue-500"
+  },
+  {
+    "title": "Reliance Retail",
+    "amount": 2800,
+    "profit": false,
+    "status": "Red",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Reliance_Retail_logo.svg/1200px-Reliance_Retail_logo.svg.png",
+    "bgColor": "bg-red-500"
+  },
+  {
+    "title": "Reliance BP Mobility",
+    "amount": 1600,
+    "profit": true,
+    "status": "Green",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Reliance_BP_Mobility_Logo.png/1024px-Reliance_BP_Mobility_Logo.png",
+    "bgColor": "bg-blue-500"
+  },
+  {
+    "title": "Reliance Digital",
+    "amount": 1400,
+    "profit": false,
+    "status": "Red",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Reliance_Digital_logo.png/800px-Reliance_Digital_logo.png",
+    "bgColor": "bg-red-500"
+  },
+  {
+    "title": "Reliance Petroleum",
+    "amount": 2000,
+    "profit": true,
+    "status": "Green",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Reliance_Petroleum_Logo.svg/1200px-Reliance_Petroleum_Logo.svg.png",
+    "bgColor": "bg-blue-500"
+  },
+  {
+    "title": "Reliance Life Sciences",
+    "amount": 1900,
+    "profit": false,
+    "status": "Red",
+    "imageUrl": "https://via.placeholder.com/150",
+    "bgColor": "bg-red-500"
+  },
+  {
+    "title": "Reliance Infra",
+    "amount": 1100,
+    "profit": true,
+    "status": "Green",
+    "imageUrl": "https://upload.wikimedia/commons/thumb/e/e6/Reliance_Infrastructure_Logo.svg/1200px-Reliance_Infrastructure_Logo.svg.png",
+    "bgColor": "bg-blue-500"
+  },
+  {
+    "title": "Reliance Capital",
+    "amount": 950,
+    "profit": false,
+    "status": "Red",
+    "imageUrl": "https://upload.wikimedia/en/thumb/0/09/Reliance_Capital_logo.svg/800px-Reliance_Capital_logo.svg.png",
+    "bgColor": "bg-red-500"
+  },
+  {
+    "title": "Adani Gas",
+    "amount": 1250,
+    "profit": true,
+    "status": "Green",
+    "imageUrl": "https://upload.wikimedia/en/thumb/e/ea/Adani_Gas_logo.svg/1200px-Adani_Gas_logo.svg.png",
+    "bgColor": "bg-blue-500"
+  },
+  {
+    "title": "Reliance Naval",
+    "amount": 700,
+    "profit": false,
+    "status": "Red",
+    "imageUrl": "https://upload.wikimedia/en/thumb/a/ad/Reliance_Naval_and_Engineering_logo.svg/1200px-Reliance_Naval_and_Engineering_logo.svg.png",
+    "bgColor": "bg-red-500"
+  },
+  {
+    "title": "Reliance MediaWorks",
+    "amount": 800,
+    "profit": true,
+    "status": "Green",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Reliance_MediaWorks_logo.svg/1200px-Reliance_MediaWorks_logo.svg.png",
+    "bgColor": "bg-blue-500"
+  }
+]
