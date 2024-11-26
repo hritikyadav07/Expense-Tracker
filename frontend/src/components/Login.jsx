@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { handleError, handleSuccess } from '../utils';
 import { ToastContainer } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAuth } from '../store/features/auth/authSlice';
 
 const Login = ({ onSwitch }) => {
-  const [loginInfo, setLoginInfo] = useState({
-    email: '',
-    password: ''
-  });
-  const [loading, setLoading] = useState(false); // Local loading state
+  const [loginInfo, setLoginInfo] = useState({ email: '', password: '' });
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  // const { isAuthenticated, loading: authLoading } = useSelector((state) => state.auth);
 
   // Handle input changes
   const handleChange = (e) => {
@@ -26,33 +28,31 @@ const Login = ({ onSwitch }) => {
       return handleError('All fields are required');
     }
 
-    setLoading(true); // Set loading state to true before API call
+    setLoading(true);
     try {
-      const url = "http://localhost:9000/auth/login";
+      const url = 'http://localhost:9000/auth/login';
       const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(loginInfo),
       });
+
       const result = await response.json();
       if (response.ok && result.success) {
         handleSuccess(result.message || 'Login Successful');
         localStorage.setItem('token', result.jwtToken);
-        console.log(result);
         localStorage.setItem('loggedInUser', result.fname);
-        setTimeout(() => {
-          navigate('/');
-        }, 1000);
+
+        
+        setTimeout(() => navigate('/dashboard'), 1000);
+        dispatch(setAuth(true)); // Update isAuthenticated state in Redux
       } else {
-        const errorMessage = result.error || 'Login failed. Please check your credentials.';
-        handleError(errorMessage); // Show toast with error message
+        handleError(result.error || 'Login failed. Please check your credentials.');
       }
     } catch (err) {
-      handleError(err);
+      handleError('An error occurred during login.');
     } finally {
-      setLoading(false); // Set loading state to false after API call
+      setLoading(false);
     }
   };
 
@@ -63,7 +63,6 @@ const Login = ({ onSwitch }) => {
         <p className="text-gray-500 text-center mb-6">Manage your expenses effortlessly</p>
 
         <form className="space-y-4" onSubmit={handleLogin}>
-          {/* Email Input */}
           <input
             type="email"
             onChange={handleChange}
@@ -73,7 +72,6 @@ const Login = ({ onSwitch }) => {
             required
           />
 
-          {/* Password Input */}
           <input
             type="password"
             onChange={handleChange}
@@ -83,16 +81,14 @@ const Login = ({ onSwitch }) => {
             required
           />
 
-          {/* Login Button */}
           <button
             type="submit"
             className="w-full py-2 text-white bg-yellow-600 rounded hover:bg-yellow-500 transition duration-200"
-            disabled={loading} // Disable button while loading
+            disabled={loading}
           >
             {loading ? 'Logging in...' : 'Continue with Email'}
           </button>
 
-          {/* Create Account Button */}
           <button
             type="button"
             onClick={onSwitch}
@@ -102,7 +98,6 @@ const Login = ({ onSwitch }) => {
           </button>
         </form>
 
-        {/* Social Login Options */}
         <div className="flex justify-center space-x-4 mt-6">
           <div className="w-10 h-10 bg-black rounded-full">
             <img src="/path-to-your-icon1.png" alt="Social Login" className="w-full h-full" />
@@ -115,14 +110,13 @@ const Login = ({ onSwitch }) => {
           </div>
         </div>
 
-        {/* Forgot Password Link */}
         <div className="text-center mt-6">
           <a href="/forgot-password" className="text-yellow-600 hover:underline">
             Forgot Password?
           </a>
         </div>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 };

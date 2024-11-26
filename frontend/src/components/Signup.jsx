@@ -1,63 +1,52 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import {ToastContainer} from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 import { handleError, handleSuccess } from '../utils';
 import { useNavigate } from 'react-router-dom';
+import { signup } from '../store/features/auth/authSlice';
+
 const Signup = ({ onSwitch }) => {
   const [signupInfo, setSignupInfo] = useState({
     fname: '',
     lname: '',
     email: '',
     password: ''
-  })
+  });
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const { loading, error } = useSelector((state) => state.auth); // To get loading/error state
-
+  const { loading, error } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   // Function to toggle password visibility
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
 
-  // Handle form submission
-
+  // Handle form changes
   const handleChange = (e) => {
-    const {name, value} = e.target;
-    const copySignupInfo = {...signupInfo};
-    copySignupInfo[name] = value;
-    setSignupInfo(copySignupInfo);
-  }
+    const { name, value } = e.target;
+    setSignupInfo({ ...signupInfo, [name]: value });
+  };
+
+  // Handle form submission
   const handleSignUp = async (e) => {
     e.preventDefault();
-    const {fname, lname, email, password} = signupInfo;
-    if(!fname || !lname || !email || !password) {
-      return handleError('All fields are required')
+    const { fname, lname, email, password } = signupInfo;
+    
+    if (!fname || !lname || !email || !password) {
+      return handleError('All fields are required');
     }
-    try {
-      const url = "http://localhost:9000/auth/signup";
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(signupInfo)
-    });
-    const result = await response.json();
-    console.log(result);
-    if(response.ok && result.success) {
-      handleSuccess(result.message || 'Signup Successfull');
-      setTimeout(() => {
+    
+    // Dispatch signup action
+    dispatch(signup(signupInfo)).then((result) => {
+      if (result.meta.requestStatus === 'fulfilled') {
+        handleSuccess('Signup Successful');
         navigate('/auth?type=login');
-      }, 1000);
-    } else {
-      const errorMessage = result.error || 'Signup failed. Please check your input.';
-      handleError(errorMessage);
-    }
-    console.log(result);
-    } catch(err) {
-      handleError(err);
-    }
-  }
+      } else {
+        handleError('Signup failed. Please check your input.');
+      }
+    });
+  };
 
   return (
     <div className="flex justify-center items-center min-h-screen p-top-5 mx-36">
@@ -131,11 +120,11 @@ const Signup = ({ onSwitch }) => {
           <button
             type="submit"
             className="w-full py-2 px-4 bg-amber-600 text-white font-semibold rounded-md hover:bg-amber-700 transition-colors"
-            disabled={loading} // Disable the button when loading
+            disabled={loading}
           >
             {loading ? 'Registering...' : 'Register'}
           </button>
-          {error && <p className="text-red-500 text-sm mt-2">{error}</p>} {/* Display error */}
+          {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
         </form>
 
         {/* Social login */}
@@ -146,13 +135,13 @@ const Signup = ({ onSwitch }) => {
         </div>
         <div className="flex justify-center space-x-4">
           <button className="p-2 border rounded-full">
-            <i className="fab fa-google text-red-500"></i> {/* FontAwesome Google icon */}
+            <i className="fab fa-google text-red-500"></i>
           </button>
           <button className="p-2 border rounded-full">
-            <i className="fab fa-facebook text-blue-600"></i> {/* FontAwesome Facebook icon */}
+            <i className="fab fa-facebook text-blue-600"></i>
           </button>
           <button className="p-2 border rounded-full">
-            <i className="fab fa-apple text-black"></i> {/* FontAwesome Apple icon */}
+            <i className="fab fa-apple text-black"></i>
           </button>
         </div>
 
