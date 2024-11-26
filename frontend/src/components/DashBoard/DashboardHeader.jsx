@@ -1,35 +1,57 @@
-import React from 'react'
+import { useState } from 'react';
 import Logo from '../Logo';
-import { useDispatch,} from 'react-redux';
-import { logout } from '../../store/features/auth/authSlice';
-import { useNavigate } from 'react-router-dom';
-
-
-
+import InputForm from './InputForm';
 function DashboardHeader() {
-  const dispatch = useDispatch()
-  const navigate = useNavigate();
-  const handleLogout  = async() =>{
-    await dispatch(logout())
-    setTimeout(() => navigate('/'), 1000);
-    localStorage.removeItem('token')
-    localStorage.removeItem('loggedInUser')
-    //Add code for routing to login page
-  }
-  //Add code for expense popup and logout
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  // Function to toggle popup visibility
+  const togglePopup = () => {
+    setIsPopupOpen(!isPopupOpen);
+  };
+
   return (
-    <div className='flex justify-between'>
-    <Logo/>
-    <div>
-      <button className="text-white bg-blue-500 px-6 py-2 rounded-md mx-2">
-        Add Expense
-      </button>
-      <button onClick={handleLogout} className='text-white bg-red-500 px-6 py-2 rounded-md'>
-        Logout
-      </button>
+    <div className="relative">
+      {/* Header Section */}
+      <div className={`flex justify-between ${isPopupOpen ? 'blur-sm' : ''}`}>
+        <Logo />
+        <div>
+          <button
+            onClick={togglePopup}
+            className="text-white bg-blue-500 px-6 py-2 rounded-md mx-2"
+          >
+            Add Expense
+          </button>
+          <button className="text-white bg-red-500 px-6 py-2 rounded-md">
+            Logout
+          </button>
+        </div>
+      </div>
+
+      {/* Popup Section */}
+      {isPopupOpen && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+          <div className="relative bg-white p-6 rounded-md shadow-md max-w-lg w-full">
+            <button
+              onClick={togglePopup}
+              className="absolute top-2 right-2 bg-red-500 px-2 text-white hover:text-gray-700"
+            >
+              ✕
+            </button>
+            <h2 className="text-lg font-medium text-gray-800 mb-4">
+              Add Expense
+            </h2>
+            {/* InputForm Component */}
+            <InputForm
+              onSubmit={(formData) => {
+                console.log('Form Submitted:', formData);
+                togglePopup(); // Close the popup after submission
+              }}
+            />
+          </div>
+        </div>
+      )}
     </div>
-    </div>
-  )
+  );
 }
 
-export default DashboardHeader
+export default DashboardHeader;
