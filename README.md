@@ -125,19 +125,10 @@ Expense-Tracker/
 ├── LICENSE                # Project license information
 └── .env                   # Environment variables (for sensitive information like DB connection)
 ```
-#
+
 1. **Current Task**:
-    - Creating Login/ SignUp Backend Functionalities
     - Creating Dashboard
     - Creating Expense APIs
+    - Creating Expense Backend
 
-##
-**API Routes**
-- **Login  Route** : /api/auth/login
-   - Method: POST
-   - Body: { email, password }
-   - Response: { token, user }
-- **Signup Route**: /api/auth/signup
-   - Method: POST
-   - Body: { firstName, lastName, email, password }
-   - Response: { token, user }
+
