@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import transactions from '../../../public/transactions.json';
+import transactions from '../../resources/transactions.json';
 
 function Transaction() {
   const [data, setData] = useState([]);

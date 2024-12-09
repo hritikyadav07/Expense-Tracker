@@ -1,5 +1,5 @@
 
-import investments from "../../../public/investments.json"; // Adjust the path to your JSON file
+import investments from "../../resources/investments.json"; // Adjust the path to your JSON file
 import Investment from "./Investment"; // Ensure the correct path to your Investment component
 
 const InvestmentList = () => {
